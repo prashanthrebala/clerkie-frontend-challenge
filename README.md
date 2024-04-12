@@ -1,30 +1,25 @@
-# React + TypeScript + Vite
+# clerkie-frontend-challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A short video demonstration of the app can be found here: https://youtu.be/bPxuevgYUJc
 
-Currently, two official plugins are available:
+This project was built using React, Vite, and TypeScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The user's linked account details are specified in `constants/accountConstants.ts`
 
-## Expanding the ESLint configuration
+The submit button is disabled if there are any errors in the form. Hovering over the submit button will display any errors that are present. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The prorated amount calculation is done through a function in utils called 
+`calculateProportionalPayments(paymentAmount: number, accountBalances: number[]): number[]`
 
-- Configure the top-level `parserOptions` property like this:
+To simplify the calculations, all dollar amounts are first converted to cents and rounded to avoid floating point errors. The split is calculated proportionally and then all values are rounded down (floored). There will then be at most n - 1 cents remaining. A cent will be added to each amount sequentially if needed, and if it doesn't exceed the initial balance by doing so. All the values are then divided by 100 and returned back. 
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+
+#### Running the project
+Download the project locally and run
+```
+  $ npm install
+  $ npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### Dependencies
+None
