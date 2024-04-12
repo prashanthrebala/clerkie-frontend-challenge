@@ -6,7 +6,7 @@ function calculateProportionalPayments(
     return new Array(accountBalances.length).fill(0);
 
   // convert all amounts to cents to avoid floating point errors
-  const amounts = accountBalances.map((balance) => balance * 100);
+  const amounts = accountBalances.map((balance) => Math.round(balance * 100));
   const target = Math.round(paymentAmount * 100);
 
   const totalBalance = amounts.reduce((a, b) => a + b, 0);
@@ -28,7 +28,7 @@ function calculateProportionalPayments(
     }
   }
 
-  // convert back to dollars and format as locale strings
+  // convert back to dollars
   return proportionalPayments.map((payment) => payment / 100);
 }
 
@@ -41,11 +41,7 @@ function convertToDollarString(amount: number): string {
 }
 
 function nAccountsSelectedMessage(n: number): string {
-  return n === 0
-    ? "0 accounts selected"
-    : n === 1
-    ? "1 account selected"
-    : `${n} accounts selected`;
+  return n === 1 ? "1 account selected" : `${n} accounts selected`;
 }
 
 function getAccountsListMessage(
